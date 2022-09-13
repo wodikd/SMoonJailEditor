@@ -1,0 +1,201 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.EventSystems;
+
+// public struct AreaInfo
+// {
+//     public float left;
+//     public float right;
+//     public float center;
+// }
+
+public class TimeController : MonoBehaviour, IDragHandler, IPointerClickHandler, 
+IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler
+{
+    public Vector2 offset;
+
+
+    private const float speed = 2f;
+    // private RectTransform area;
+    private static RectTransform rectTransform;
+    // private AreaInfo areaInfo = new AreaInfo();
+
+    private static GameObject barPoint;
+    private static List<GameObject> barPointList = new List<GameObject>();
+    private static GameObject TimeBarImage;
+    private bool isMouseEnter;
+    private bool onDrag;
+    private bool isClick;
+
+    private void Start()
+    {
+        rectTransform = transform.Find("TimeBar").GetComponent<RectTransform>();
+        TimeBarImage = transform.Find("TimeBar").Find("TimeBarImage").gameObject;
+
+        PivotX = GameManager.audioSource.time;
+
+        barPoint = Resources.Load<GameObject>("Prefab/BarPoint_Rad");
+    }
+
+    private void Update()
+    {
+        if (isMouseEnter)
+        {
+            rectTransform.sizeDelta += (Vector2.right * Input.GetAxisRaw("Mouse ScrollWheel") * 400);
+        }
+        onDrag = false;
+    }
+
+    /// <summary>
+    /// t의 위치에 BarPoint를 생성합니다
+    /// </summary>
+    /// <param name="t">(0 ~ 1)</param>
+    public static void SetPoint(float t)
+    {
+        # if UNITY_EDITOR
+        if (t < 0 || t > 1)
+        {
+            Debug.LogWarning($"The value is out of tolerance \nvalue: {t}");
+        }
+        # endif
+
+        t = Mathf.Clamp(t, 0, 1);
+
+        GameObject temp = Instantiate(barPoint);
+        RectTransform tempRect = temp.GetComponent<RectTransform>();
+
+        barPointList = new List<GameObject>() { temp };
+        tempRect.SetParent(TimeBarImage.transform);
+        // reset
+        tempRect.offsetMax = new Vector2(tempRect.offsetMax.x, 0);
+            // anchor setting
+        tempRect.anchorMin = Vector2.zero;
+        tempRect.anchorMax = Vector2.up;
+        tempRect.localScale = Vector3.one;
+
+        temp.GetComponent<RectTransform>().anchoredPosition = new Vector2(t * rectTransform.rect.width, 0);
+    }
+    
+    /// <summary>
+    /// t의 위치에 BarPoint를 추가합니다
+    /// </summary>
+    /// <param name="t">(0 ~ 1)</param>
+    public static void AddPoint(float t)
+    {
+        # if UNITY_EDITOR
+        if (t < 0 || t > 1)
+        {
+            Debug.LogWarning($"The value is out of tolerance \nvalue: {t}");
+        }
+        # endif
+
+        t = Mathf.Clamp(t, 0, 1);
+
+        GameObject temp = Instantiate(barPoint);
+        RectTransform tempRect = temp.GetComponent<RectTransform>();
+
+        barPointList.Add(temp);
+        tempRect.SetParent(TimeBarImage.transform);
+        // reset
+        tempRect.offsetMax = new Vector2(tempRect.offsetMax.x, 0);
+            // anchor setting
+        tempRect.anchorMin = Vector2.zero;
+        tempRect.anchorMax = Vector2.up;
+        tempRect.localScale = Vector3.one;
+
+        temp.GetComponent<RectTransform>().anchoredPosition = new Vector2(t * rectTransform.rect.width, 0);
+    }
+
+    public static void DeletePoint()
+    {
+        for (int i = 0; i < barPointList.Count; ++i)
+        {
+            Destroy(barPointList[i]);
+        }
+        barPointList.Clear();
+    }
+    
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        
+    }
+
+    public void OnDrag(PointerEventData eventData)
+    {
+        // rectTransform.pivot -= Vector2.right * (eventData.delta.x / rectTransform.sizeDelta.x);
+        // float x = rectTransform.pivot.x - (eventData.delta.x / rectTransform.sizeDelta.x);
+        float x = rectTransform.pivot.x - (eventData.delta.x / rectTransform.sizeDelta.x) * speed;
+
+        rectTransform.pivot = (Mathf.Clamp(x, 0, 1) * Vector2.right) + (Vector2.up * 0.5f);
+
+        onDrag = true;
+
+        // Debug.Log(eventData.delta);
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        isMouseEnter = true;
+
+        # if UNITY_EDITOR
+        Debug.Log("mouseEnter");
+        # endif
+    }
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        isMouseEnter = false;
+
+        # if UNITY_EDITOR
+        Debug.Log("mouseExit");
+        # endif
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        isClick = true;
+    }
+
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        isClick = false;
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <value>(0 ~ 1)</value>
+    public float PivotX
+    {
+        get
+        {
+            return rectTransform.pivot.x;
+        }
+        set
+        {
+            rectTransform.pivot = (Vector2.right * value) + (Vector2.up * 0.5f);
+        }
+    }
+
+    public bool GetisMouseEnter { get => isMouseEnter; }
+
+    public bool GetOnDrag { get => onDrag; }
+
+    public bool GetisClick { get => isClick; }
+
+    // public Vector2 SizeSet
+    // {
+    //     set
+    //     {
+    //         rectTransform.sizeDelta = value;
+    //     }
+    // }
+
+    // public float Width
+    // {
+    //     set
+    //     {
+    //         rectTransform.sizeDelta = (Vector2.right * value) + (Vector2.up * rectTransform.sizeDelta.y);
+    //     }
+    // }
+}

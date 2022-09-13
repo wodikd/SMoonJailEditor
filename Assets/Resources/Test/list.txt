@@ -1,0 +1,20 @@
+All
+AttackType
+
+bullet
+vec startPos
+float angle
+float spped
+float time
+
+bool targetingPlayer
+bool targetingPos
+bool randomPos
+
+우리
+이용자 id donvo1
+비번 !4949a78!77
+1032
+574319
+패턴
+(키보드 넘패드 기준)951236
