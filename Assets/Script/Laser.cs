@@ -2,6 +2,8 @@
 using System;
 using System.Collections;
 using Unity.Burst.Intrinsics;
+using UnityEditor.Compilation;
+using UnityEngine.UIElements;
 
 namespace SMoonJail
 {
@@ -10,7 +12,8 @@ namespace SMoonJail
         public int delayBeat;
         public int durationBeat;
 
-        public float beatGap;
+        private float angle;
+        private float posAngle;
 
         [HideInInspector]
         public Area area1;
@@ -26,8 +29,6 @@ namespace SMoonJail
         protected override void Start()
         {
             base.Start();
-
-            beatGap = Editor.MusicTool.GetBeatGap;
         }
 
         public override void UpdatePosition()
@@ -61,9 +62,34 @@ namespace SMoonJail
             
         }
 
-        public void Set()
+        public void Set(float posAngle, float angle, int delayBeat, int durationBeat)
         {
             
+        }
+
+
+        public float Angle
+        {
+            get
+            {
+                return angle;
+            }
+            set
+            {
+                angle = value;
+            }
+        }
+
+        public float PosAngle
+        {
+            get
+            {
+                return posAngle;
+            }
+            set
+            {
+                posAngle = value;
+            }
         }
 
         public float EndTime
