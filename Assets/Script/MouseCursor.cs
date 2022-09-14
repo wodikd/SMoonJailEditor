@@ -222,6 +222,7 @@ public class MouseCursor
 
                     SetCursorToLaser2();
                 }
+
             };
 
             void SetCursorToLaser2()
@@ -229,20 +230,18 @@ public class MouseCursor
                 cursorBehavior = () =>
                 {
                     var node = UnityEngine.Object.Instantiate(
-                        original: GameManager.BulletPrefab,
+                        original: GameManager.LaserPrefab,
                         position: GameTool.InputTool.WorldCursorPos(GameManager.inGameCamera),
                         rotation: Quaternion.identity
                         ).GetComponent<Laser>();
 
-                    while (true)
-                    {
-                        node.Set(
-                            posAngle: 0,
-                            angle: 0,
-                            delayBeat: 16,
-                            durationBeat: 4
+                    node.Set(
+                        time: GameManager.GameTime,
+                        posAngle: ExtensionMath.Vec2Deg(InputTool.WorldCursorPos(GameManager.inGameCamera)),
+                        angle: ExtensionMath.Vec2Deg(node.transform.position - Vector3.zero),
+                        delayBeat: 16,
+                        durationBeat: 4
                             );
-                    }
 
                     SetCursorToLaser3(node);
                 };
@@ -253,11 +252,40 @@ public class MouseCursor
                 cursorBehavior = () =>
                 {
                     node.Set(
-                        posAngle: 0, 
-                        angle: 0, 
-                        delayBeat: 16, 
-                        durationBeat: 4
+                       time: GameManager.GameTime,
+                       posAngle: ExtensionMath.Vec2Deg(InputTool.WorldCursorPos(GameManager.inGameCamera)),
+                       angle: ExtensionMath.Vec2Deg(node.transform.position - Vector3.zero),
+                       delayBeat: 16,
+                       durationBeat: 4
+                       );
+
+                    node.area1.T = 1;
+                    node.area2.T = 1;
+
+                    if (!Input.GetMouseButton(0))
+                    {
+                        node.UpdatePosition();
+                        SetCursorToLaser4(node);
+                    }
+                };
+            }
+
+            void SetCursorToLaser4(Laser node)
+            {
+                cursorBehavior = () =>
+                {
+                    node.Angle =
+                        ExtensionMath.Vec2Deg(
+                            InputTool.WorldCursorPos(GameManager.inGameCamera)
                         );
+
+                    node.area1.T = 1;
+                    node.area2.T = 1;
+
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        SetCursorToLaser();
+                    }
                 };
             }
         }
