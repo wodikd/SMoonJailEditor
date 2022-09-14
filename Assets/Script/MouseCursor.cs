@@ -8,6 +8,7 @@ using UnityEngine.EventSystems;
 using UnityEditor.Compilation;
 using Microsoft.Win32.SafeHandles;
 using Unity.VisualScripting;
+using Unity.Collections;
 
 public class MouseCursor
 {
@@ -67,9 +68,9 @@ public class MouseCursor
                 {
                     if (EventSystem.current.IsPointerOverGameObject())
                     {
-                        #if UNITY_EDITOR
+#if UNITY_EDITOR
                         Debug.Log("pointer is over the gameobject");
-                        #endif
+#endif
                         return;
                     }
 
@@ -115,25 +116,25 @@ public class MouseCursor
                                         );
                                 }
 
-                                
+
                             }
                             else
                             {
                                 ObjectEditorManager.NodeList.Clear();
                             }
 
-                            
 
 
-                            #if UNITY_EDITOR
+
+#if UNITY_EDITOR
                             Debug.Log($"Select Ray: {rayHit2D.transform?.name}");
-                            #endif
+#endif
                         }
                         else
                         {
-                            #if UNITY_EDITOR
+#if UNITY_EDITOR
                             Debug.Log("Select drag");
-                            #endif
+#endif
                         }
 
                         SetCursorToSelect();
@@ -155,9 +156,9 @@ public class MouseCursor
                 {
                     if (EventSystem.current.IsPointerOverGameObject())
                     {
-                        #if UNITY_EDITOR
+#if UNITY_EDITOR
                         Debug.Log("pointer is over the gameobject");
-                        #endif
+#endif
                         return;
                     }
 
@@ -205,7 +206,7 @@ public class MouseCursor
                     }
                 };
             }
-            
+
         }
 
         void SetCursorToLaser()
@@ -233,7 +234,30 @@ public class MouseCursor
                         rotation: Quaternion.identity
                         ).GetComponent<Laser>();
 
-                    
+                    while (true)
+                    {
+                        node.Set(
+                            posAngle: 0,
+                            angle: 0,
+                            delayBeat: 16,
+                            durationBeat: 4
+                            );
+                    }
+
+                    SetCursorToLaser3(node);
+                };
+            }
+
+            void SetCursorToLaser3(Laser node)
+            {
+                cursorBehavior = () =>
+                {
+                    node.Set(
+                        posAngle: 0, 
+                        angle: 0, 
+                        delayBeat: 16, 
+                        durationBeat: 4
+                        );
                 };
             }
         }

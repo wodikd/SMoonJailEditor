@@ -64,7 +64,10 @@ namespace SMoonJail
 
         public void Set(float posAngle, float angle, int delayBeat, int durationBeat)
         {
-            
+            Angle = angle;
+            PosAngle = posAngle;
+            this.delayBeat = delayBeat;
+            this.durationBeat = durationBeat;
         }
 
 
