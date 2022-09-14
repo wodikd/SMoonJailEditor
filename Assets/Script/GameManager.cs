@@ -32,9 +32,7 @@ public class GameManager : MonoBehaviour
     public static ObjectEditorManager objectEditorManager;
 
     private static GameNode bulletPrefab;
-    private static GameNode laserPrefab;
     public static GameNode BulletPrefab { get => bulletPrefab; }
-    public static GameNode LaserPrefab { get => laserPrefab; }
 
     public static List<GameNode> gameNodeList = new List<GameNode>();
 
@@ -55,7 +53,6 @@ public class GameManager : MonoBehaviour
         SLManager = new(GameNodeList);
 
         bulletPrefab = Resources.Load<GameNode>("Prefab/Node/Bullet");
-        laserPrefab = Resources.Load<GameNode>("Prefab/Node/Laser");
 
         LoadSceneAdditive("List");
         LoadSceneAdditive("Timeline");

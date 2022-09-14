@@ -4,8 +4,6 @@ using System.Collections;
 using Unity.Burst.Intrinsics;
 using UnityEditor.Compilation;
 using UnityEngine.UIElements;
-using Unity.VisualScripting.FullSerializer;
-using SMoonJail.Editor;
 
 namespace SMoonJail
 {
@@ -55,40 +53,23 @@ namespace SMoonJail
             }
             else
             {
-                    
+                
             }
         }
 
         public override void UpdateValue()
         {
-           
+            
         }
 
-        public void Set(float time, float posAngle, float angle, int delayBeat, int durationBeat)
+        public void Set(float posAngle, float angle, int delayBeat, int durationBeat)
         {
-            Time = time;
             Angle = angle;
             PosAngle = posAngle;
             this.delayBeat = delayBeat;
             this.durationBeat = durationBeat;
         }
-        
-        public new float Time
-        {
-            get
-            {
-                return base.Time;
-            }
-            set
-            {
-                float time = value;
-                float gap = MusicTool.GetBeatGap;
 
-                time = (time / gap) * gap;
-
-                base.Time = time;
-            }
-        }
 
         public float Angle
         {
@@ -99,9 +80,6 @@ namespace SMoonJail
             set
             {
                 angle = value;
-
-                transform.rotation = Quaternion.
-                    AngleAxis(angle, transform.forward);
             }
         }
 
@@ -114,10 +92,6 @@ namespace SMoonJail
             set
             {
                 posAngle = value;
-
-                transform.position = GameTool.ExtensionMath
-                    .Deg2Vec(posAngle) * 15;
-                    
             }
         }
 

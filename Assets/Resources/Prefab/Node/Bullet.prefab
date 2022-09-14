@@ -49,7 +49,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetPlayer: 0
   randomPosition: 0
-  time: 0
 --- !u!212 &937122283487452540
 SpriteRenderer:
   m_ObjectHideFlags: 0
