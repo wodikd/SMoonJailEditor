@@ -14,21 +14,16 @@ namespace SMoonJail
         {
             GameManager.gameNodeList.Add(this);
 
-            UpdateAll();
+            UpdatePosition();
         }
 
         protected virtual void OnEnable()
         {
-            UpdateAll();
-        }
-
-        public abstract void UpdateValue();
-        public abstract void UpdatePosition();
-        public virtual void UpdateAll()
-        {
-            UpdateValue();
             UpdatePosition();
         }
+
+        public abstract void UpdatePosition();
+        
 
         [SerializeField]
         private float time;

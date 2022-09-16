@@ -125,7 +125,6 @@ namespace SMoonJail
                 {
                     var node = ObjectEditorManager.NodeList[i].GetComponent<Bullet>();
                     node.StartPos = new Vector2(posX, node.StartPos.y);
-                    node.UpdateAll();
                     UpdateNodeInfo();
                 }
             }
@@ -138,7 +137,6 @@ namespace SMoonJail
                 {
                     var node = ObjectEditorManager.NodeList[i].GetComponent<Bullet>();
                     node.StartPos = new Vector2(node.StartPos.x, posY);
-                    node.UpdateAll();
                     UpdateNodeInfo();
                 }
             }
@@ -151,7 +149,6 @@ namespace SMoonJail
                 {
                     var node = ObjectEditorManager.NodeList[i].GetComponent<Bullet>();
                     node.Time = time;
-                    node.UpdateAll();
                     UpdateNodeInfo();
                 }
             }
@@ -164,7 +161,6 @@ namespace SMoonJail
                 {
                     var node = ObjectEditorManager.NodeList[i].GetComponent<Bullet>();
                     node.Speed = speed;
-                    node.UpdateAll();
                     UpdateNodeInfo();
                 }
             }
@@ -177,7 +173,6 @@ namespace SMoonJail
                 {
                     var node = ObjectEditorManager.NodeList[i].GetComponent<Bullet>();
                     node.Angle = angle;
-                    node.UpdateAll();
                     UpdateNodeInfo();
                 }
             }

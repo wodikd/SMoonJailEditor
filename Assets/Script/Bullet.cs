@@ -1,3 +1,4 @@
+using GameTool;
 using UnityEngine;
 
 namespace SMoonJail
@@ -30,6 +31,9 @@ namespace SMoonJail
             set
             {
                 angle = value;
+
+                transform.rotation =
+                    Quaternion.AngleAxis(angle, transform.forward);
             }
         }
         public Vector2 StartPos
@@ -62,14 +66,8 @@ namespace SMoonJail
             this.startPos = startPos;
             this.angle = angle;
             this.speed = speed;
-
-            UpdateAll();
         }
 
-        public override void UpdateValue()
-        {
-            transform.rotation = Quaternion.AngleAxis(angle, transform.forward);
-        }
         public override void UpdatePosition()
         {
             rigidbody.MovePosition(startPos + ((GameManager.GameTime - Time) * -speed * GameManager.mapInfo.BPM) * (Vector2)transform.right);

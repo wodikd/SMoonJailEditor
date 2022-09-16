@@ -9,10 +9,6 @@ namespace SMoonJail
             
         }
 
-        public override void UpdateValue()
-        {
-            
-        }
 
         public override GameNodeType GetNodeType
         { 

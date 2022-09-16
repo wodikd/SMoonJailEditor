@@ -4,6 +4,7 @@ using System.Collections;
 using Unity.Burst.Intrinsics;
 using UnityEditor.Compilation;
 using UnityEngine.UIElements;
+using GameTool;
 
 namespace SMoonJail
 {
@@ -53,14 +54,12 @@ namespace SMoonJail
             }
             else
             {
-                
+                float t = (gameTime - ActionTime) / (EndTime - ActionTime);
+                area1.T = t;
+                area2.T = t;
             }
         }
 
-        public override void UpdateValue()
-        {
-            
-        }
 
         public void Set(float posAngle, float angle, int delayBeat, int durationBeat)
         {
@@ -80,6 +79,9 @@ namespace SMoonJail
             set
             {
                 angle = value;
+
+                transform.rotation = 
+                    Quaternion.AngleAxis(Angle, transform.forward);
             }
         }
 
@@ -92,6 +94,8 @@ namespace SMoonJail
             set
             {
                 posAngle = value;
+
+                transform.position = ExtensionMath.Deg2Vec(PosAngle) * 15;
             }
         }
 
