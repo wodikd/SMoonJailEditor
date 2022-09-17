@@ -7,6 +7,9 @@ using UnityEngine.SceneManagement;
 using SMoonJail.Editor;
 using SMoonJail;
 using GameTool;
+using UnityEngine.UIElements;
+using UnityEditor.UIElements;
+using Unity.VisualScripting;
 
 // using UnityScene = UnityEngine.SceneManagement;
 //Todo:
@@ -254,22 +257,45 @@ public class GameManager : MonoBehaviour
         {
             if (!isOnUI)
             {
-                while (Input.GetMouseButton(2))
+                if (Input.GetMouseButtonDown(2))
                 {
-                    var newPos = InputTool.WorldCursorPos(inGameCamera);
+                    oldPos = InputTool.WorldCursorPos(inGameCamera);
 
-                    var deltaPos = oldPos - newPos;
+                    while (Input.GetMouseButton(2))
+                    {
+                        var newPos = InputTool.WorldCursorPos(inGameCamera);
 
-                    inGameCamera.transform.position += new Vector3(deltaPos.x, deltaPos.y, -10);
+                        var deltaPos = oldPos - newPos;
+                        inGameCamera.transform.position += new Vector3(deltaPos.x, deltaPos.y, -10);
 
-                    inGameCamera.transform.position = Vector3.ClampMagnitude(inGameCamera.transform.position, 50);
+                        var cameraPos = (Vector2)inGameCamera.transform.position;
 
-                    yield return null;
+                        const float maxRange = 30;
+
+                        inGameCamera.transform.position = cameraPos.sqrMagnitude < maxRange ?
+                            new Vector3(cameraPos.x, cameraPos.y, -10) : (Vector3)Vector2.ClampMagnitude(cameraPos, maxRange) + Vector3.forward * -10;
+
+                        //inGameCamera.transform.position = Vector3.ClampMagnitude(inGameCamera.transform.position, 50);
+
+                        yield return null;
+                    }
                 }
 
-                inGameCamera.orthographicSize -= Input.GetAxisRaw("Mouse ScrollWheel") * 10;
+                //while (Input.GetMouseButton(2))
+                //{
+                //    var newPos = InputTool.WorldCursorPos(inGameCamera);
 
-                oldPos = InputTool.WorldCursorPos(inGameCamera);
+                //    var deltaPos = oldPos - newPos;
+                //    Debug.Log($"NewPos: {newPos}, deltaPos: {deltaPos}");
+                //    inGameCamera.transform.position += new Vector3(deltaPos.x, deltaPos.y, -10);
+
+                //    inGameCamera.transform.position = Vector3.ClampMagnitude(inGameCamera.transform.position, 50);
+
+                //    yield return null;
+                //}
+
+                inGameCamera.orthographicSize -= Input.GetAxisRaw("Mouse ScrollWheel") * 10;
+                inGameCamera.orthographicSize = inGameCamera.orthographicSize < 15 ? inGameCamera.orthographicSize : 15;
             }
 
             yield return null;

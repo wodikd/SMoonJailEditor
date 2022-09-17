@@ -237,7 +237,8 @@ public class MouseCursor
                         posAngle: 0,
                         angle: 0,
                         delayBeat: 16,
-                        durationBeat: 4
+                        durationBeat: 4,
+                        time: GameManager.GameTime
                         );
 
                     SetCursorToLaser3(node);
@@ -258,10 +259,11 @@ public class MouseCursor
                             );
 
                     node.Set(
-                        posAngle: posAngle, 
-                        angle: angle, 
-                        delayBeat: 16, 
-                        durationBeat: 4
+                        posAngle: posAngle,
+                        angle: angle,
+                        delayBeat: 16,
+                        durationBeat: 4,
+                        time: GameManager.GameTime
                         );
 
                     node.area1.T = 1;

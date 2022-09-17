@@ -44,9 +44,9 @@ namespace SMoonJail
 
             var gameTime = GameManager.GameTime;
 
-            if (Time < gameTime)
+            if (gameTime < ActionTime + Time)
             {
-                float runTime = gameTime - Time;
+                float runTime = Time - gameTime;
                 float t = runTime / ActionTime;
 
                 area1.T = 1;
@@ -54,19 +54,21 @@ namespace SMoonJail
             }
             else
             {
-                float t = (gameTime - ActionTime) / (EndTime - ActionTime);
+                float t = 1 - ((gameTime - (ActionTime + Time)) / DurationTime);
+                Debug.Log($"GT: {gameTime}, AT: {ActionTime}, DT: {DurationTime}, T: {t}");
                 area1.T = t;
                 area2.T = t;
             }
         }
 
 
-        public void Set(float posAngle, float angle, int delayBeat, int durationBeat)
+        public void Set(float posAngle, float angle, int delayBeat, int durationBeat, float time)
         {
             Angle = angle;
             PosAngle = posAngle;
             this.delayBeat = delayBeat;
             this.durationBeat = durationBeat;
+            this.Time = time;
         }
 
 
@@ -105,6 +107,14 @@ namespace SMoonJail
             {
                 return (delayBeat + durationBeat)
                     * Editor.MusicTool.GetBeatGap;
+            }
+        }
+
+        public float DurationTime
+        {
+            get
+            {
+                return durationBeat * Editor.MusicTool.GetBeatGap;
             }
         }
 
