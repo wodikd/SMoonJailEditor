@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace SMoonJail.Editor
 {
-    public class LaserEditor : MonoBehaviour, INodeEditor
+    public class LaserEditor : NodeEditor 
     {
         private static InputField posAngleInputField;
         private static InputField timeInputField;
@@ -32,7 +32,7 @@ namespace SMoonJail.Editor
             }
         }
 
-        public void UpdateNodeInfo()
+        public override void UpdateNodeInfo()
         {
             const string replaceString = "--";
 

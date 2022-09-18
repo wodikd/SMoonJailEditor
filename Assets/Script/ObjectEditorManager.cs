@@ -13,18 +13,22 @@ namespace SMoonJail
             addition = 1
         }
 
-        public interface INodeEditor
-        {
-            void UpdateNodeInfo();
-        }
 
         [System.Serializable]
         public class ObjectEditorManager : MonoBehaviour
         {
             private static List<GameNode> nodeList = new List<GameNode>();
-            private static INodeEditor bulletEditor;
-            private static INodeEditor laserEditor;
+            private static NodeEditor bulletEditor;
+            private static NodeEditor laserEditor;
 
+            private static NodeEditor currentEditor;
+            public static NodeEditor CurrentEditor
+            {
+                get
+                {
+                    return currentEditor;
+                }
+            }
             private void Awake()
             {
                 bulletEditor = GameManager.FindObjectOfType<BulletEditor>();
@@ -37,7 +41,7 @@ namespace SMoonJail
                 {
                     nodeList.Add(gameNode);
 
-                    UpdateNodeInfo(gameNode.GetNodeType);
+                    UpdateNodeInfo();
                 }
                 else if (nodeList[0].GetNodeType == gameNode.GetNodeType)
                 {
@@ -54,53 +58,64 @@ namespace SMoonJail
                             break;
                     }
 
-                    UpdateNodeInfo(gameNode.GetNodeType);
+                    UpdateNodeInfo();
                 }
                 else
                 {
-                    Debug.Log($"type of list[0] is {nodeList[0].GetNodeType} but you tried to add {gameNode.GetNodeType}");
+                    GameTool.Debugger.Log($"type of list[0] is {nodeList[0].GetNodeType} but you tried to add {gameNode.GetNodeType}");
                 }
 
                 
             }
 
-            public static void UpdateNodeInfo()
+            private static void SwitchNodeEditor()
             {
-                switch (nodeList[0].GetNodeType)
+                bulletEditor.gameObject.SetActive(false);
+                laserEditor.gameObject.SetActive(false);
+
+                switch (NodeList[0].GetNodeType)
                 {
                     case GameNodeType.None:
                         break;
                     case GameNodeType.Bullet:
-                        bulletEditor.UpdateNodeInfo();
+                        currentEditor = bulletEditor;
                         break;
                     case GameNodeType.Laser:
-                        laserEditor.UpdateNodeInfo();
+                        currentEditor = laserEditor;
                         break;
                     case GameNodeType.Bomb:
                         break;
                     default:
                         break;
                 }
+
+                currentEditor.gameObject.SetActive(true);
+                currentEditor.UpdateNodeInfo();
             }
 
-            public static void UpdateNodeInfo(GameNodeType nodeType)
+            public static void UpdateNodeInfo()
             {
-                switch (nodeType)
-                {
-                    case GameNodeType.None:
-                        break;
-                    case GameNodeType.Bullet:
-                        bulletEditor.UpdateNodeInfo();
-                        break;
-                    case GameNodeType.Laser:
-                        laserEditor.UpdateNodeInfo();
-                        break;
-                    case GameNodeType.Bomb:
-                        break;
-                    default:
-                        break;
-                }
+                currentEditor.UpdateNodeInfo();
             }
+
+            //public static void UpdateNodeInfo(GameNodeType nodeType)
+            //{
+            //    switch (nodeType)
+            //    {
+            //        case GameNodeType.None:
+            //            break;
+            //        case GameNodeType.Bullet:
+            //            bulletEditor.UpdateNodeInfo();
+            //            break;
+            //        case GameNodeType.Laser:
+            //            laserEditor.UpdateNodeInfo();
+            //            break;
+            //        case GameNodeType.Bomb:
+            //            break;
+            //        default:
+            //            break;
+            //    }
+            //}
 
             public static List<GameNode> NodeList
             {

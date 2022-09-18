@@ -8,7 +8,7 @@ namespace SMoonJail
     namespace Editor
     {
         [System.Serializable]
-        public class BulletEditor : MonoBehaviour, INodeEditor
+        public class BulletEditor : NodeEditor
         {
             private static InputField startPosXInputField;
             private static InputField startPosYInputField;
@@ -25,7 +25,7 @@ namespace SMoonJail
                 angleInputField = transform.Find("AngleInputField").GetComponent<InputField>();
             }
 
-            public void UpdateNodeInfo()
+            public override void UpdateNodeInfo()
             {
                 const string replaceString = "--";
 
