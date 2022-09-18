@@ -125,8 +125,9 @@ namespace SMoonJail
                 {
                     var node = ObjectEditorManager.NodeList[i].GetComponent<Bullet>();
                     node.StartPos = new Vector2(posX, node.StartPos.y);
-                    UpdateNodeInfo();
                 }
+                UpdateNodeInfo();
+                
             }
 
             public void SetStartPosYForInputField(InputField inputField)
@@ -137,8 +138,8 @@ namespace SMoonJail
                 {
                     var node = ObjectEditorManager.NodeList[i].GetComponent<Bullet>();
                     node.StartPos = new Vector2(node.StartPos.x, posY);
-                    UpdateNodeInfo();
                 }
+                UpdateNodeInfo();
             }
 
             public void SetTimeForInputField(InputField inputField)
@@ -149,8 +150,8 @@ namespace SMoonJail
                 {
                     var node = ObjectEditorManager.NodeList[i].GetComponent<Bullet>();
                     node.Time = time;
-                    UpdateNodeInfo();
                 }
+                UpdateNodeInfo();
             }
 
             public void SetSpeedForInputField(InputField inputField)
@@ -161,8 +162,8 @@ namespace SMoonJail
                 {
                     var node = ObjectEditorManager.NodeList[i].GetComponent<Bullet>();
                     node.Speed = speed;
-                    UpdateNodeInfo();
                 }
+                UpdateNodeInfo();
             }
 
             public void SetAngleForInputField(InputField inputField)
@@ -173,8 +174,8 @@ namespace SMoonJail
                 {
                     var node = ObjectEditorManager.NodeList[i].GetComponent<Bullet>();
                     node.Angle = angle;
-                    UpdateNodeInfo();
                 }
+                UpdateNodeInfo();
             }
         }
     }

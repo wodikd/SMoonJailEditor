@@ -28,6 +28,7 @@ namespace SMoonJail
             private void Awake()
             {
                 bulletEditor = GameManager.FindObjectOfType<BulletEditor>();
+                laserEditor = GameManager.FindObjectOfType<LaserEditor>();
             }
 
             public static void AddNodeToList(GameNode gameNode, ListAddMode addMode)
@@ -73,6 +74,7 @@ namespace SMoonJail
                         bulletEditor.UpdateNodeInfo();
                         break;
                     case GameNodeType.Laser:
+                        laserEditor.UpdateNodeInfo();
                         break;
                     case GameNodeType.Bomb:
                         break;
@@ -91,6 +93,7 @@ namespace SMoonJail
                         bulletEditor.UpdateNodeInfo();
                         break;
                     case GameNodeType.Laser:
+                        laserEditor.UpdateNodeInfo();
                         break;
                     case GameNodeType.Bomb:
                         break;
