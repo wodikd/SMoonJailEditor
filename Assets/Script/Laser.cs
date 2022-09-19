@@ -1,9 +1,4 @@
 ﻿using UnityEngine;
-using System;
-using System.Collections;
-using Unity.Burst.Intrinsics;
-using UnityEditor.Compilation;
-using UnityEngine.UIElements;
 using GameTool;
 
 namespace SMoonJail
@@ -25,6 +20,7 @@ namespace SMoonJail
         {
             area1 = transform.Find("Area1").GetComponent<Area>();
             area2 = transform.Find("Area2").GetComponent<Area>();
+
         }
 
         protected override void Start()
@@ -55,7 +51,6 @@ namespace SMoonJail
             else
             {
                 float t = 1 - ((gameTime - (ActionTime + Time)) / DurationTime);
-                Debug.Log($"GT: {gameTime}, AT: {ActionTime}, DT: {DurationTime}, T: {t}");
                 area1.T = t;
                 area2.T = t;
             }

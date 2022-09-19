@@ -93,6 +93,9 @@ namespace SMoonJail
                 currentEditor.UpdateNodeInfo();
             }
 
+            /// <summary>
+            /// == currentEditor.UpdateNodeInfo()
+            /// </summary>
             public static void UpdateNodeInfo()
             {
                 currentEditor.UpdateNodeInfo();

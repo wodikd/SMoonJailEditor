@@ -938,9 +938,9 @@ MonoBehaviour:
   m_OnSubmit:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 724234881}
-        m_TargetAssemblyTypeName: SX3Game.Editor.BulletEditor, Assembly-CSharp
-        m_MethodName: SetAngleForInputField
+      - m_Target: {fileID: 724234885}
+        m_TargetAssemblyTypeName: SMoonJail.Editor.LaserEditor, Assembly-CSharp
+        m_MethodName: SetDurationForInputField
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 583184412}
@@ -1451,17 +1451,16 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 724234880}
-  - component: {fileID: 724234881}
+  - component: {fileID: 724234885}
   - component: {fileID: 724234884}
   - component: {fileID: 724234883}
-  - component: {fileID: 724234882}
   m_Layer: 5
   m_Name: LaserEditorPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &724234880
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1492,42 +1491,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &724234881
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 724234879}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c8f7ce517d87e8438f6b98acfd7f070, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &724234882
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 724234879}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Padding:
-    m_Left: 0
-    m_Right: 0
-    m_Top: 0
-    m_Bottom: 0
-  m_ChildAlignment: 0
-  m_StartCorner: 0
-  m_StartAxis: 1
-  m_CellSize: {x: 0, y: 100}
-  m_Spacing: {x: 0, y: 0}
-  m_Constraint: 0
-  m_ConstraintCount: 2
 --- !u!114 &724234883
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1566,6 +1529,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 724234879}
   m_CullTransparentMesh: 1
+--- !u!114 &724234885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 724234879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44d2b0aff2e79e544903480b87a11dcb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &792987980
 GameObject:
   m_ObjectHideFlags: 0
@@ -2196,12 +2171,12 @@ MonoBehaviour:
   m_OnSubmit:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 724234881}
-        m_TargetAssemblyTypeName: SX3Game.Editor.BulletEditor, Assembly-CSharp
+      - m_Target: {fileID: 724234885}
+        m_TargetAssemblyTypeName: SMoonJail.Editor.LaserEditor, Assembly-CSharp
         m_MethodName: SetTimeForInputField
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 946498859}
+          m_ObjectArgument: {fileID: 908062085}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.InputField, UnityEngine.UI
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -2355,9 +2330,9 @@ MonoBehaviour:
   m_OnSubmit:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 724234881}
-        m_TargetAssemblyTypeName: SX3Game.Editor.BulletEditor, Assembly-CSharp
-        m_MethodName: SetSpeedForInputField
+      - m_Target: {fileID: 724234885}
+        m_TargetAssemblyTypeName: SMoonJail.Editor.LaserEditor, Assembly-CSharp
+        m_MethodName: SetDelayForInputField
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 946498859}
@@ -2594,8 +2569,8 @@ MonoBehaviour:
   m_OnSubmit:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 724234881}
-        m_TargetAssemblyTypeName: SX3Game.Editor.BulletEditor, Assembly-CSharp
+      - m_Target: {fileID: 724234885}
+        m_TargetAssemblyTypeName: SMoonJail.Editor.LaserEditor, Assembly-CSharp
         m_MethodName: SetAngleForInputField
         m_Mode: 2
         m_Arguments:
@@ -3645,12 +3620,12 @@ MonoBehaviour:
   m_OnSubmit:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 724234881}
-        m_TargetAssemblyTypeName: SX3Game.Editor.BulletEditor, Assembly-CSharp
-        m_MethodName: SetTimeForInputField
+      - m_Target: {fileID: 724234885}
+        m_TargetAssemblyTypeName: SMoonJail.Editor.LaserEditor, Assembly-CSharp
+        m_MethodName: SetPosAngleForInputField
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 946498859}
+          m_ObjectArgument: {fileID: 1653631069}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.InputField, UnityEngine.UI
           m_IntArgument: 0
           m_FloatArgument: 0
