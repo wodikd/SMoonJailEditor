@@ -1,9 +1,11 @@
 using GameTool;
+using SMoonJail.Editor;
+using UnityEditor.TerrainTools;
 using UnityEngine;
 
 namespace SMoonJail
 {
-    public class Bullet : GameNode
+    public class Bullet : GameNode, Editor.IOnNodeInteract
     {
         private float speed;
         private float angle;
@@ -119,6 +121,23 @@ namespace SMoonJail
 
         #endregion
 
+        public void OnClick()
+        {
+            if (Input.GetKey(KeyCode.LeftControl))
+            {
+                ObjectEditorManager.AddNodeToList(
+                    gameNode: this,
+                    addMode: ListAddMode.addition
+                    );
+            }
+            else
+            {
+                ObjectEditorManager.AddNodeToList(
+                    gameNode: this,
+                    addMode: ListAddMode.beginning
+                    );
+            }
+        }
         public override GameNodeType GetNodeType
         {
             get

@@ -101,21 +101,27 @@ public class MouseCursor
                             // 오브잭트를 클릭 했는지 안했는지
                             if (rayHit2D)
                             {
-                                if (Input.GetKey(KeyCode.LeftControl))
+                                if (!rayHit2D.transform.TryGetComponent(out IOnNodeInteract onInteract))
                                 {
-                                    ObjectEditorManager.AddNodeToList(
-                                        gameNode: rayHit2D.transform.GetComponent<GameNode>(),
-                                        addMode: ListAddMode.addition
-                                        );
+                                    return;
                                 }
-                                else
-                                {
-                                    ObjectEditorManager.AddNodeToList(
-                                        gameNode: rayHit2D.transform.GetComponent<GameNode>(),
-                                        addMode: ListAddMode.beginning
-                                        );
-                                }
-
+                                onInteract.OnClick();
+                                #region Old
+                                //if (Input.GetKey(KeyCode.LeftControl))
+                                //{
+                                //    ObjectEditorManager.AddNodeToList(
+                                //        gameNode: rayHit2D.transform.GetComponent<GameNode>(),
+                                //        addMode: ListAddMode.addition
+                                //        );
+                                //}
+                                //else
+                                //{
+                                //    ObjectEditorManager.AddNodeToList(
+                                //        gameNode: rayHit2D.transform.GetComponent<GameNode>(),
+                                //        addMode: ListAddMode.beginning
+                                //        );
+                                //}
+                                #endregion
 
                             }
                             else
