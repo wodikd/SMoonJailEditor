@@ -105,7 +105,9 @@ public class MouseCursor
                                 {
                                     return;
                                 }
+
                                 onInteract.OnClick();
+
                                 #region Old
                                 //if (Input.GetKey(KeyCode.LeftControl))
                                 //{
@@ -128,9 +130,6 @@ public class MouseCursor
                             {
                                 ObjectEditorManager.NodeList.Clear();
                             }
-
-
-
 
 #if UNITY_EDITOR
                             Debug.Log($"Select Ray: {rayHit2D.transform?.name}");

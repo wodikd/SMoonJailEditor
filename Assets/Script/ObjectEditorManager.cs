@@ -31,8 +31,9 @@ namespace SMoonJail
             }
             private void Awake()
             {
-                bulletEditor = GameManager.FindObjectOfType<BulletEditor>();
-                laserEditor = GameManager.FindObjectOfType<LaserEditor>();
+                bulletEditor = FindObjectOfType<BulletEditor>();
+                laserEditor = FindObjectOfType<LaserEditor>();
+
             }
 
             public static void AddNodeToList(GameNode gameNode, ListAddMode addMode)
@@ -57,6 +58,8 @@ namespace SMoonJail
                         default:
                             break;
                     }
+
+                    SwitchNodeEditor();
 
                     UpdateNodeInfo();
                 }
@@ -90,7 +93,30 @@ namespace SMoonJail
                 }
 
                 currentEditor.gameObject.SetActive(true);
-                currentEditor.UpdateNodeInfo();
+            }
+
+            private static void SwitchNodeEditor(GameNodeType nodeType)
+            {
+                bulletEditor.gameObject.SetActive(false);
+                laserEditor.gameObject.SetActive(false);
+
+                switch (nodeType)
+                {
+                    case GameNodeType.None:
+                        break;
+                    case GameNodeType.Bullet:
+                        currentEditor = bulletEditor;
+                        break;
+                    case GameNodeType.Laser:
+                        currentEditor = laserEditor;
+                        break;
+                    case GameNodeType.Bomb:
+                        break;
+                    default:
+                        break;
+                }
+
+                currentEditor.gameObject.SetActive(true);
             }
 
             /// <summary>
